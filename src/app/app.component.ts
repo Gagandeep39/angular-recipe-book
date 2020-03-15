@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { load } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-root',
@@ -6,11 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  recipeVisible : boolean = true;
-  shoppingVisible : boolean = false;
-
-  toggleVisibility(status: {recipeStatus: boolean, shoppingStatus: boolean}){
-    this.recipeVisible = status.recipeStatus;
-    this.shoppingVisible = status.shoppingStatus;
+  loadedFeature = 'recipe'
+  toggleVisibility(feature : string){
+    this.loadedFeature = feature;
   }
 }

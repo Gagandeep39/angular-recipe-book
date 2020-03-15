@@ -8,7 +8,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
 
-  @Output() visibilityStatus = new EventEmitter<{recipeStatus : boolean, shoppingStatus: boolean}>();
+  @Output() featureSelected = new EventEmitter<string>();
 
 
   constructor() { }
@@ -16,12 +16,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  showShopping(){
-    this.visibilityStatus.emit({recipeStatus : false, shoppingStatus : true});
-  }
-
-  showRecipes(){
-    this.visibilityStatus.emit({recipeStatus : true, shoppingStatus : false});
+  onSelect(feature : string){
+    this.featureSelected.emit(feature);
   }
 
 }
