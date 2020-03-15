@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'recipe-book';
+  recipeVisible : boolean = true;
+  shoppingVisible : boolean = false;
+
+  toggleVisibility(status: {recipeStatus: boolean, shoppingStatus: boolean}){
+    this.recipeVisible = status.recipeStatus;
+    this.shoppingVisible = status.shoppingStatus;
+  }
 }
