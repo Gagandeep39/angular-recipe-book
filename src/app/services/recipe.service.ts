@@ -1,6 +1,7 @@
 import { Injectable, Output, EventEmitter } from "@angular/core";
 import { Recipe } from "../models/recipe.model";
 import { Ingredient } from "../models/ingredient.model";
+import { ShoppingListService } from "./shopping-list.service";
 
 @Injectable({
   providedIn: "root"
@@ -30,7 +31,7 @@ export class RecipeService {
     )
   ];
 
-  constructor() {}
+  constructor(private shoppingListService : ShoppingListService) {}
 
   // Slice with no param returns a copy of an array
   // Without splice, the method will pass an array reference
@@ -42,5 +43,9 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
+  }
+
+  addIngredientsToShoppingList(ingredients : Ingredient[]){
+    this.shoppingListService.addMultipleIngredients(ingredients);
   }
 }

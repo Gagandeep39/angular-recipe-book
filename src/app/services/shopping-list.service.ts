@@ -27,10 +27,10 @@ export class ShoppingListService {
     this.ingredientsChanged.emit(this.ingredients.slice());
   }
 
-  addMultipleIngredients(ingredientsList : Ingredient[]){
-    ingredientsList.forEach(element => {
-      this.ingredients.push(element);
-    });
+  // '...' -> Spread operator converts array to list
+  // List data can be directly added to an array at once using spread oeprator 
+  addMultipleIngredients(ingredients : Ingredient[]){
+    this.ingredients.push(...ingredients);
     this.ingredientsChanged.emit(this.ingredients.slice());
   }
 }
