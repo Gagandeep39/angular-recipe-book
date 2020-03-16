@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
+import { RecipeService } from '../services/recipe.service';
 
 @Component({
   selector: 'app-recipes',
@@ -10,9 +11,12 @@ export class RecipesComponent implements OnInit {
 
   @Output() selectedRecipe : Recipe;
 
-  constructor() { }
+  constructor(private recipeService : RecipeService) { }
 
   ngOnInit() {
+    this.recipeService.recipeSelected.subscribe((recipe : Recipe)=>{
+      this.selectedRecipe = recipe;
+    });
   }
 
   // 1. Data is Passed from recipe item as boolean  (Event Emitter - recipeSelected- void )
@@ -20,5 +24,7 @@ export class RecipesComponent implements OnInit {
   // 3. Data is passed from recipe-list in recipe (Even-Emitter - recipeWasSelected - recipe)
   // 4. Data is recieved in recipe by assigning $event to recipeObject  (Event BInding (recipeSelected = $event))
   // 5. Data is passed from recipe to recipe datails (Property Bunding - [recipe] = recipeSelected)
+
+
 
 }

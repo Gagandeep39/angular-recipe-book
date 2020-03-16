@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
-import { componentFactoryName } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
+
+  @Output() recipeSelected = new EventEmitter<Recipe>();
 
   recipes: Recipe[] = [
     new Recipe('Test Recipe', 'This is a Simple Recipe', 'https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2017/11/beet.jpg'),
