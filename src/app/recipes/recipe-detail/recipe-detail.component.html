@@ -13,9 +13,10 @@
   <div class="col-xs-12">
     <div class="btn-group">
       <!-- Remoi=ving data-toggle will break the button  -->
+      <!-- style="cursor: pointer; creates a <a href> type effect  -->
       <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Manage Recipe</button>
       <div class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Add to shopping List</a></li>
+        <li><a class="dropdown-item" (click)="addToShoppingList()" style="cursor: pointer;">Add to shopping List</a></li>
         <li><a class="dropdown-item" href="#">Edit Recipe</a></li>
         <li><a class="dropdown-item" href="#">Delete Recipe</a></li>
       </div>
