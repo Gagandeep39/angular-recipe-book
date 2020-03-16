@@ -12,7 +12,7 @@ export class RecipeService {
     new Recipe(
       "Burger",
       "A hamburger (also burger for short) is a food consisting of one or more cooked patties of ground meat, usually beef, placed inside a sliced bread roll or bun.",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/RedDot_Burger.jpg/1200px-RedDot_Burger.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/RedDot_Burger.jpg/428px-RedDot_Burger.jpg",
       [
         new Ingredient("Bread", 2),
         new Ingredient("Cabbage", 1)
