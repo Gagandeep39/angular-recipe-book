@@ -1,5 +1,6 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Ingredient } from '../models/ingredient.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { Ingredient } from '../models/ingredient.model';
 export class ShoppingListService {
 
   //Whenever a new ingredient is added, a new array will be passed to the emitter's subscriber
-  @Output() ingredientsChanged = new EventEmitter<Ingredient[]>();
+  ingredientsChanged = new Subject<Ingredient[]>();
 
   ingredients : Ingredient[] = [
     new Ingredient('Apples', 5),
@@ -24,13 +25,13 @@ export class ShoppingListService {
 
   addIngredients(newIngredient : Ingredient){
     this.ingredients.push(newIngredient);
-    this.ingredientsChanged.emit(this.ingredients.slice());
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
 
   // '...' -> Spread operator converts array to list
   // List data can be directly added to an array at once using spread oeprator 
   addMultipleIngredients(ingredients : Ingredient[]){
     this.ingredients.push(...ingredients);
-    this.ingredientsChanged.emit(this.ingredients.slice());
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
 }

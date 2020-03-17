@@ -1,22 +1,28 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, OnDestroy } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
 import { RecipeService } from '../services/recipe.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
-export class RecipesComponent implements OnInit {
+export class RecipesComponent implements OnInit, OnDestroy {
 
   @Output() selectedRecipe : Recipe;
+  subscription: Subscription;
 
   constructor(private recipeService : RecipeService) { }
 
   ngOnInit() {
-    this.recipeService.recipeSelected.subscribe((recipe : Recipe)=>{
+    this.subscription = this.recipeService.recipeSelected.subscribe((recipe : Recipe)=>{
       this.selectedRecipe = recipe;
     });
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   // 1. Data is Passed from recipe item as boolean  (Event Emitter - recipeSelected- void )
