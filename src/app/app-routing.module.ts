@@ -14,7 +14,7 @@ const appRoutes: Routes = [
         { path: '', component: RecipeStartComponent },
         { path: 'new', component: RecipeEditComponent },   // Must be before :id, to prevent 'new' from being interpreted as :id
         { path: ':id', component: RecipeDetailComponent },
-        { path: ':id/edit', component: RecipeDetailComponent }
+        { path: ':id/edit', component: RecipeEditComponent }
     ] },
     { path: 'shoppinglist', component: ShoppingListComponent },
 ]
