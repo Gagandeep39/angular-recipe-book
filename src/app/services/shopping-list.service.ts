@@ -10,6 +10,9 @@ export class ShoppingListService {
   //Whenever a new ingredient is added, a new array will be passed to the emitter's subscriber
   ingredientsChanged = new Subject<Ingredient[]>();
 
+  // Sends data to Edit Component 
+  startedIngredientEditing = new Subject<number>();
+
   ingredients : Ingredient[] = [
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10)
@@ -21,6 +24,11 @@ export class ShoppingListService {
   // Better approach would to to use an emitter to inform that list has changed
   getIngredients(){
     return this.ingredients.slice();
+  }
+
+  // Get a single Ingredient 
+  getIngredient(index: number){
+    return this.ingredients.slice()[index];
   }
 
   addIngredients(newIngredient : Ingredient){
