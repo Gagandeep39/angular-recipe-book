@@ -51,4 +51,11 @@ export class ShoppingEditComponent implements OnInit {
     this.editMode = false;
   }
 
+  // Delete button deltes the item selected fr update 
+  // For adding new Ingredient, the button is not visible 
+  deleteIngredient(){
+    this.shoppingListService.deleteIngredient(this.editItemIndex);
+    this.clearForm();
+  }
+
 }
