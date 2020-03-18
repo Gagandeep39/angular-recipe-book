@@ -54,28 +54,46 @@
       </div>
     </div>
     <!-- Recipe  -->
-    <div class="container form-group">
-      <label >Ingredients</label>
-      <div class="row" formArrayName="ingredients">
+    <div class="form-group">
+      <label *ngIf="recipeForm.get('ingredients')['controls'].length > 0">Ingredients</label>
+      <div class="container form-group" formArrayName="ingredients">
         <div 
         style="margin-top: 10px;"
-        *ngFor="let ingredientCtrl of recipeForm.get('ingredients').value; let i = index"
+        *ngFor="let ingredientCtrl of recipeForm.get('ingredients')['controls']; let i = index"
         class="row"
         [formGroupName]="i">
-          <div class="col-7">
-            <input formControlName="name" class="form-control" type="text">
+          <div class="col-7" class="form-group">
+            <input 
+            formControlName="name" 
+            placeholder="Ingredient"
+            class="form-control" 
+            [ngClass]="{'is-invalid': submitted && recipeForm.get('ingredients')['controls'][i].get('name').invalid}"
+            type="text">
+            <!-- {{recipeForm.get('ingredients').value | json}} -->
+            <!-- {{recipeForm.get('ingredients').controls[i] }} -->
+            <div class="invalid-feedback" *ngIf="recipeForm.get('ingredients')['controls'][i].get('name').invalid">Field cannot be empty</div>
           </div>
           <div class="col-3">
-            <input class="form-control" formControlName="amount" type="number" >
+            <input 
+            class="form-control" 
+            [ngClass]="{'is-invalid': submitted && recipeForm.get('ingredients')['controls'][i].get('amount').invalid}"
+            placeholder="0" 
+            formControlName="amount" 
+            type="number" >
+            <div class="invalid-feedback" *ngIf="submitted && recipeForm.get('ingredients')['controls'][i].get('amount').invalid">
+              <div *ngIf="recipeForm.get('ingredients')['controls'][i].get('amount').errors['required']">Required</div>
+              <div *ngIf="recipeForm.get('ingredients')['controls'][i].get('amount').errors['pattern']">Must be >= 1</div>
+            </div>
           </div>
           <div class="col-2">
-            <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
+            <button type="button" class="btn btn-danger" (click)="onDeleteIngredientsRow(i)">X</button>
           </div>
         </div>
       </div>
+      <hr>
+      <button class="btn btn-success" type="button" (click)="onAddIngredientsRow()">Add Ingredient</button>
     </div>
     <pre>
-      <!-- {{recipeForm.get('ingredients').value | json}} -->
     </pre>
   </form>
 </div>
@@ -83,3 +101,8 @@
 recipeForm.get('ingredients').controls; let i = index"
 recipeForm.get('ingredients').value; let i = index"
 Either one SHOULD work -->
+<!-- .controls -> Validation  -->
+<!-- .value -> Stored value  -->
+<!-- Tip - Hover ouver form attributs eg. formControlName for hints  -->
+<!-- Dont use .value insted of .controls in let ingredientCtrl of recipeForm.get('ingredients')['controls'] -->
+<!-- This will prevent entering 1+ character -->

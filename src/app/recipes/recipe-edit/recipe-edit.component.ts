@@ -27,15 +27,13 @@ export class RecipeEditComponent implements OnInit {
       this.editMode = params["id"] != null; // Will be true if id exists, false when id oesnt exist and we create a new recipe
       this.initForm();
     });
-
-    console.log(this.recipeForm)
   }
 
   initForm() {
     let recipeName = "";
     let recipeImagePath = "";
     let recipeDescription = "";
-    let recipeIngredients = new FormArray([]); 
+    let recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
       this.editedRecipe = this.recipeService.getRecipeById(this.recipeIndex);
@@ -47,8 +45,8 @@ export class RecipeEditComponent implements OnInit {
         for (let ingredient of this.editedRecipe.ingredients) {
           recipeIngredients.push(
             new FormGroup({
-              'name': new FormControl(ingredient.name),
-              'amount': new FormControl(ingredient.amount)
+              'name': new FormControl(ingredient.name, Validators.required),
+              'amount': new FormControl(ingredient.amount, [Validators.required, Validators.pattern("^[1-9]+[0-9]*$")])
             })
           )
         }
@@ -68,6 +66,7 @@ export class RecipeEditComponent implements OnInit {
 
   submitForm() {
     this.submitted = true;
+    console.log(this.recipeForm)
     if (this.recipeForm.valid) {
       const newRecipe = new Recipe(
         this.recipeForm.value['name'],
@@ -80,10 +79,32 @@ export class RecipeEditComponent implements OnInit {
       } else {
         this.recipeService.addRecipe(newRecipe);
       }
+      alert("Recipe Added")
       this.editMode = false;
       this.submitted = false;
     }
   }
 
-  onDeleteIngredient(index: number){}
+  //Removes the row from elemnt
+  onDeleteIngredientsRow(index: number){
+    this.formIngredientsArray.removeAt(index)
+  }
+
+  // Add a new row in Form array
+  onAddIngredientsRow(){
+    this.formIngredientsArray.push(this.createRow())
+
+  }
+
+  // Created a getter to return ingredients form array 
+  get formIngredientsArray() {
+    return this.recipeForm.get('ingredients') as FormArray
+  }
+
+  createRow(){
+    return new FormGroup({
+      'name': new FormControl('', Validators.required),
+      'amount': new FormControl('', [Validators.required, Validators.pattern("^[1-9]+[0-9]*$")])
+    })
+  }
 }
