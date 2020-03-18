@@ -52,7 +52,7 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
-    this.recipeChanged.next(this.recipes);
+    this.recipeChanged.next(this.recipes.slice());
   }
 
   addIngredientsToShoppingList(ingredients : Ingredient[]){
@@ -60,6 +60,7 @@ export class RecipeService {
   }
 
   updateRecipe(index: number, newRecipe: Recipe) {
-    this.shoppingListService[index] = newRecipe;
+    this.recipes[index] = newRecipe;
+    this.recipeChanged.next(this.recipes.slice());
   }
 }
