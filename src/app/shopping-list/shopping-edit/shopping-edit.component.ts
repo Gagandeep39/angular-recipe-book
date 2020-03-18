@@ -13,10 +13,22 @@ export class ShoppingEditComponent implements OnInit {
   // @ViewChild('nameInput') nameInputRef : ElementRef;
   // @ViewChild('quantityInput') quantityInputRef : ElementRef;
   @ViewChild('productForm') productForm: NgForm;
+  editMode = false;
+  editItemIndex: number;
+  editedItem: Ingredient;
 
   constructor(private shoppingListService : ShoppingListService) { }
 
   ngOnInit() {
+    this.shoppingListService.startedIngredientEditing.subscribe((index) => {
+      this.editMode = true;
+      this.editItemIndex = index;
+      this.editedItem = this.shoppingListService.getIngredient(this.editItemIndex);
+      this.productForm.setValue({
+        name: this.editedItem.name,
+        amount: this.editedItem.amount
+      });
+    });
   }
 
   onAddItem(){
