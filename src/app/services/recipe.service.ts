@@ -55,4 +55,8 @@ export class RecipeService {
   addIngredientsToShoppingList(ingredients : Ingredient[]){
     this.shoppingListService.addMultipleIngredients(ingredients);
   }
+
+  updateRecipe(index: number, newRecipe: Recipe) {
+    this.shoppingListService[index] = newRecipe;
+  }
 }
