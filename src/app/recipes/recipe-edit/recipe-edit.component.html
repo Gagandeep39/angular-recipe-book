@@ -1,3 +1,39 @@
-<p>
-  recipe-edit works!
-</p>
+<div class="container">
+  <form [formGroup]="recipeForm" (ngSubmit)="submitForm()">
+    <!-- name  -->
+    <div class="form-group">
+      <label for="recipename">Recipe Name</label>
+      <input 
+      type="text" 
+      name="name" 
+      formControlName="name"
+      id="recipename" 
+      [ngClass]="{'is-invalid': submitted && recipeForm.get('name').invalid}"
+      class="form-control"
+      placeholder="Enter Recipe Name">
+      <div class="invalid-feedback" *ngIf="submitted && recipeForm.get('name').invalid">
+        <div *ngIf="recipeForm.get('name').errors['required']">Field cannot be Empty</div>
+      </div>
+    </div>
+    <!-- description  -->
+    <div class="form-group">
+      <label for="recipedescription">Recipe Description</label>
+      <textarea 
+      placeholder="Enter Description" 
+      class="form-control" 
+      [ngClass]="{'is-invalid': submitted && recipeForm.get('description').invalid}"
+      name="description" 
+      formControlName="description"
+      id="recipedescription" 
+      cols="30" 
+      rows="5"></textarea>
+      <div class="invalid-feedback" *ngIf="submitted && recipeForm.get('description').invalid">
+        <div *ngIf="recipeForm.get('description').errors['required']">Field cannot be Empty</div>
+        <div *ngIf="recipeForm.get('description').errors['minlength']">Aleast 20 char of description required</div>
+      </div>
+    </div>
+    <!-- image path  -->
+    <!-- Submit button  -->
+    <button type="submit" class="btn btn-success">{{editMode ? 'Update' : 'Add Recipe'}}</button>
+  </form>
+</div>
