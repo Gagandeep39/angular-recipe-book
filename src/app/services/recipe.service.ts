@@ -11,6 +11,8 @@ export class RecipeService {
   
   // Use EventEmitter only for event binding between a child and parent component
   recipeSelected = new Subject<Recipe>();
+  // Import the component that recipe koist has changed 
+  recipeChanged = new Subject<Recipe[]>();
 
   recipes: Recipe[] = [
     new Recipe(
@@ -50,6 +52,7 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
+    this.recipeChanged.next(this.recipes);
   }
 
   addIngredientsToShoppingList(ingredients : Ingredient[]){
