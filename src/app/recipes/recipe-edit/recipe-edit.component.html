@@ -1,5 +1,10 @@
 <div class="container">
   <form [formGroup]="recipeForm" (ngSubmit)="submitForm()">
+    
+    <!-- Submit button  -->
+    <button type="submit" class="btn btn-success">{{editMode ? 'Update' : 'Add Recipe'}}</button>
+    <!-- cancel button  -->
+    <button type="button" class="btn btn-danger m-2">Cancel</button>
     <!-- name  -->
     <div class="form-group">
       <label for="recipename">Recipe Name</label>
@@ -33,7 +38,34 @@
       </div>
     </div>
     <!-- image path  -->
-    <!-- Submit button  -->
-    <button type="submit" class="btn btn-success">{{editMode ? 'Update' : 'Add Recipe'}}</button>
+    <div class="form-group">
+      <label for="recipeurl">Recipe Name</label>
+      <input 
+      type="text" 
+      name="recipeurl" 
+      formControlName="imagePath"
+      id="recipeurl" 
+      [ngClass]="{'is-invalid': submitted && recipeForm.get('imagePath').invalid}"
+      class="form-control"
+      placeholder="Enter Image URL">
+      <div class="invalid-feedback" *ngIf="submitted && recipeForm.get('imagePath').invalid">
+        <div *ngIf="recipeForm.get('imagePath').errors['required']">Field cannot be Empty</div>
+      </div>
+    </div>
+    <!-- Recipe  -->
+    <div class="form-group">
+      <label >Ingredients</label>
+      <div class="row">
+        <div class="col-7">
+          <input class="form-control" type="text" name="" id="">
+        </div>
+        <div class="col-3">
+          <input class="form-control" type="number" name="" id="">
+        </div>
+        <div class="col-2">
+          <button type="button" class="btn btn-danger" >X</button>
+        </div>
+      </div>
+    </div>
   </form>
 </div>
