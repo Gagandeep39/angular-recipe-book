@@ -3,8 +3,8 @@
     
     <!-- Submit button  -->
     <button type="submit" class="btn btn-success">{{editMode ? 'Update' : 'Add Recipe'}}</button>
-    <!-- cancel button  -->
-    <button type="button" class="btn btn-danger m-2">Cancel</button>
+    <!-- cancel button - Retuns to previous page -->
+    <button type="button" class="btn btn-danger m-2" [routerLink]="['../']" routerLinkActive="router-link-active" >Cancel</button>
     <hr>
     <!-- name  -->
     <div class="form-group">
