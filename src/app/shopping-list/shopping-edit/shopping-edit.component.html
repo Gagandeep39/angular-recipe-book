@@ -34,14 +34,14 @@
             class="form-control">
             <div class="invalid-feedback" *ngIf="productForm.submitted && iquantity.invalid">
               <div *ngIf="iquantity.errors.required">Enter Quantity</div>
-              <div *ngIf="iquantity.errors.pattern">Quantity must be greater than 0</div>
+              <div *ngIf="iquantity.errors.pattern">Quantity can't be 0 or less</div>
             </div>
           </div>
         </div>
   
         <div class="row">
-          <div class="col-sm-6">
-            <button class="btn btn-success mr-1" type="submit">Add</button>
+          <div class="col-md-8">
+            <button class="btn btn-success mr-1" type="submit"> {{editMode ? 'Update' : 'Add'}} </button>
             <button class="btn btn-danger mr-1" type="button">Delete</button>
             <button class="btn btn-primary mr-1" type="button">Clear</button>
           </div>

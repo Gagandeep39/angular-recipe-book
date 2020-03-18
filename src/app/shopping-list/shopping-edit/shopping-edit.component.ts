@@ -34,8 +34,12 @@ export class ShoppingEditComponent implements OnInit {
   onAddItem(){
     if(this.productForm.valid){
     const values = this.productForm.value;
-    const newIngredient = new Ingredient(values.name, values.quantity);
-    this.shoppingListService.addIngredients(newIngredient); 
+    const newIngredient = new Ingredient(values.name, values.amount);
+    if(this.editMode){
+      this.shoppingListService.updateIngredients(this.editItemIndex, newIngredient);
+    } else {
+      this.shoppingListService.addIngredients(newIngredient); 
+    }
     this.productForm.resetForm();
     }
   }
