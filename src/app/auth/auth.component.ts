@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class AuthComponent implements OnInit {
   isLoginMode = false;
   isLoading = false;
+  // To display Error
+  error: string = null;
 
   constructor(private authService: AuthService) {}
 
@@ -37,6 +39,7 @@ export class AuthComponent implements OnInit {
         },
         error => {
           console.log(error);
+          this.error = error.statusText + ' ' + error.status;
           this.isLoading = false;
         }
       );
@@ -48,6 +51,7 @@ export class AuthComponent implements OnInit {
         },
         error => {
           console.log(error);
+          this.error = error.statusText + ' ' + error.status;
           this.isLoading = false;
         }
       );
