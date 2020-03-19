@@ -39,8 +39,8 @@ export class DataStorageService {
           console.log(error);
         },
         () => {
-          console.log('Saved');
-          alert('Dala Saved');
+          console.log('Saved data to server');
+          alert('Data Saved to server');
         }
       );
   }
