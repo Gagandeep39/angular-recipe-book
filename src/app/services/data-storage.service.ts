@@ -12,7 +12,17 @@ export class DataStorageService {
   constructor(private http: HttpClient, private recipeService: RecipeService) {}
 
   fetchDataFromServer() {
-    return this.http.get(this.server_url);
+    return this.http.get(this.server_url).subscribe(
+      (responseList: Recipe[]) => {
+        this.recipeService.setRecipes(responseList);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        console.log('Fetched data from Server');
+      }
+    );
   }
 
   saveDataToServer() {
