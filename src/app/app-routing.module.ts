@@ -37,3 +37,8 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+
+// When we try to access '/recipes/2' before fething server DataCue, the app will crash
+// To fix this, We can create a guard or add a resolver
+// Resolvre executes a set of code before a path is acccessed
+// Here before accessing '/recipes/:id' data is fetched from serve
