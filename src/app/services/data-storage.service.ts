@@ -26,6 +26,7 @@ export class DataStorageService {
   }
 
   saveDataToServer() {
+    // console.log(this.recipeService.getRecipes());
     this.http
       .put<{ recipes: Recipe[] }>(
         this.server_url,
@@ -45,3 +46,8 @@ export class DataStorageService {
       );
   }
 }
+
+// Post method will append new array in firebase
+// It wil consits of uniquekey -> ID -> Recipe Object
+// Pu method will replace the data in the server
+// It will be as ID -> Object
