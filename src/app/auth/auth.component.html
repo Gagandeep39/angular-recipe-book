@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-xs-12 col-md-6">
-    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <app-loading-spinner *ngIf="isLoading" ></app-loading-spinner>
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm" *ngIf="!isLoading">
       <!-- Email  -->
       <div class="form-group">
         <label for="email">Email</label>
