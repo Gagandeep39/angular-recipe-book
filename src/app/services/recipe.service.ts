@@ -13,24 +13,7 @@ export class RecipeService {
   // Import the component that recipe koist has changed
   recipeChanged = new Subject<Recipe[]>();
 
-  recipes: Recipe[] = [
-    new Recipe(
-      'Burger',
-      'A hamburger (also burger for short) is a food consisting of one or more cooked patties of ground meat, usually beef, placed inside a sliced bread roll or bun.',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/RedDot_Burger.jpg/428px-RedDot_Burger.jpg',
-      [new Ingredient('Bread', 2), new Ingredient('Cabbage', 1)]
-    ),
-    new Recipe(
-      'Pasta',
-      'Pasta is a type of food typically made from an unleavened dough of durum wheat flour',
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/%28Pasta%29_by_David_Adam_Kess_%28pic.2%29.jpg/377px-%28Pasta%29_by_David_Adam_Kess_%28pic.2%29.jpg',
-      [
-        new Ingredient('Wheat', 1),
-        new Ingredient('Eggs', 2),
-        new Ingredient('Flour', 1)
-      ]
-    )
-  ];
+  recipes: Recipe[] = [];
 
   constructor(private shoppingListService: ShoppingListService) {}
 
