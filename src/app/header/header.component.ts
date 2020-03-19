@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   constructor(private dataStorageService: DataStorageService) {}
 
   ngOnInit() {
-    this.dataStorageService.fetchDataFromServer();
+    this.fetchDataFromServer();
   }
 
   saveDataToServer() {
@@ -20,6 +20,6 @@ export class HeaderComponent implements OnInit {
   }
 
   fetchDataFromServer() {
-    this.dataStorageService.fetchDataFromServer();
+    this.dataStorageService.fetchDataFromServer().subscribe();
   }
 }
