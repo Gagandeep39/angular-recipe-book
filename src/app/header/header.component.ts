@@ -11,7 +11,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class HeaderComponent implements OnInit {
   constructor(private dataStorageService: DataStorageService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dataStorageService.fetchDataFromServer();
+  }
 
   saveDataToServer() {
     this.dataStorageService.saveDataToServer();
