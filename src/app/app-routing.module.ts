@@ -1,3 +1,4 @@
+import { AuthComponent } from './auth/auth.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
       }
     ]
   },
-  { path: 'shoppinglist', component: ShoppingListComponent }
+  { path: 'shoppinglist', component: ShoppingListComponent },
+  { path: 'auth', component: AuthComponent }
 ];
 
 @NgModule({

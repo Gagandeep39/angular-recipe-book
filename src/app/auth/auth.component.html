@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+      <!-- Email  -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+        name="email"
+        placeholder="Email"
+        ngModel 
+        required
+        email
+        minlength="6"
+        type="text" 
+        id="email" 
+        class="form-control">
+      </div>
+      <!-- password  -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+        name="password"
+        minlength="4"
+        required
+        placeholder="Password"
+        ngModel
+        type="password" 
+        id="password" 
+        class="form-control">
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid"> {{ isLoginMode ? 'Login' : 'Sign Up' }} </button>
+        <button type="button" class="btn btn-primary m-1" (click)="switchMode()">Switch To {{ isLoginMode ? 'Sign Up' : 'Login' }}</button>
+      </div>
+    </form>
+  </div>
+</div>
