@@ -39,7 +39,7 @@ export class AuthComponent implements OnInit {
         },
         error => {
           console.log(error);
-          this.error = error.statusText + ' ' + error.status;
+          this.error = error;
           this.isLoading = false;
         }
       );
@@ -51,7 +51,7 @@ export class AuthComponent implements OnInit {
         },
         error => {
           console.log(error);
-          this.error = error.statusText + ' ' + error.status;
+          this.error = error;
           this.isLoading = false;
         }
       );
