@@ -1,7 +1,8 @@
+import { User } from './../models/user.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { throwError, Subject } from 'rxjs';
 
 export interface AuthResponseData {
   idToken: string;
@@ -22,10 +23,14 @@ export class AuthService {
   signInUrl =
     'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
 
+  // Subject stores Logged In user's data
+  userCredential = new Subject<User>();
+
   constructor(private http: HttpClient) {}
 
+  // The response data will be an AuthResponseData object
+  // Whenever user logs in or signs up, this data is fetched
   signUp(email: string, password: string) {
-    // The response data will be an AuthResponseData object
     return this.http
       .post<AuthResponseData>(this.signUpUrl + this.apiKey, {
         email: email,
@@ -33,8 +38,22 @@ export class AuthService {
         returnSecureToken: true
       })
       .pipe(
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(responseData =>
+          this.createUser(
+            responseData.email,
+            responseData.localId,
+            responseData.idToken,
+            +responseData.expiresIn
+          )
+        )
       );
+  }
+
+  createUser(email: string, id: string, token: string, expiresIn: number) {
+    const expiryDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const user = new User(email, id, token, expiryDate);
+    this.userCredential.next(user);
   }
 
   logIn(email: string, password: string) {
@@ -45,31 +64,39 @@ export class AuthService {
         returnSecureToken: true
       })
       .pipe(
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(responseData =>
+          this.createUser(
+            responseData.email,
+            responseData.localId,
+            responseData.idToken,
+            +responseData.expiresIn
+          )
+        )
       );
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
     let errorMessage = 'An Error Has Occured';
-          if (errorResponse.error || errorResponse.error.error) {
-            switch (errorResponse.error.error.message) {
-              case 'EMAIL_NOT_FOUND':
-                errorMessage = 'Email doesn\'t Exist';
-                break;
-              case 'INVALID_PASSWORD':
-                errorMessage = 'Invalid Password';
-                break;
-                case 'EMAIL_EXISTS':
-                  errorMessage = 'Email already exists';
-                  break;
-                case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-                  errorMessage = 'Try again later';
-                  break;
-              default:
-                break;
-            }
-          }
-          return throwError(errorMessage);
+    if (errorResponse.error || errorResponse.error.error) {
+      switch (errorResponse.error.error.message) {
+        case 'EMAIL_NOT_FOUND':
+          errorMessage = 'Email doesn\'t Exist';
+          break;
+        case 'INVALID_PASSWORD':
+          errorMessage = 'Invalid Password';
+          break;
+        case 'EMAIL_EXISTS':
+          errorMessage = 'Email already exists';
+          break;
+        case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+          errorMessage = 'Try again later';
+          break;
+        default:
+          break;
+      }
+    }
+    return throwError(errorMessage);
   }
 }
 // Inside catchError(this.handleError)
