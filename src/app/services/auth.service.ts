@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -33,22 +33,7 @@ export class AuthService {
         returnSecureToken: true
       })
       .pipe(
-        catchError(errorResponse => {
-          let errorMessage = 'An error has Occured';
-          if (errorResponse.error || errorResponse.error.error) {
-            switch (errorResponse.error.error.message) {
-              case 'EMAIL_EXISTS':
-                errorMessage = 'Email already exists';
-                break;
-              case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-                errorMessage = 'Try again later';
-                break;
-              default:
-                break;
-            }
-          }
-          return throwError(errorMessage);
-        })
+        catchError(this.handleError)
       );
   }
 
@@ -60,8 +45,12 @@ export class AuthService {
         returnSecureToken: true
       })
       .pipe(
-        catchError(errorResponse => {
-          let errorMessage = 'An Error Has Occured';
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(errorResponse: HttpErrorResponse) {
+    let errorMessage = 'An Error Has Occured';
           if (errorResponse.error || errorResponse.error.error) {
             switch (errorResponse.error.error.message) {
               case 'EMAIL_NOT_FOUND':
@@ -70,12 +59,22 @@ export class AuthService {
               case 'INVALID_PASSWORD':
                 errorMessage = 'Invalid Password';
                 break;
+                case 'EMAIL_EXISTS':
+                  errorMessage = 'Email already exists';
+                  break;
+                case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+                  errorMessage = 'Try again later';
+                  break;
               default:
                 break;
             }
           }
           return throwError(errorMessage);
-        })
-      );
   }
 }
+// Inside catchError(this.handleError)
+// handleError is a method passed as referece
+// catctError provides a error response which is taken as parameter in handleError
+// Handle error returns throwError
+// Another substitue to this will be ->
+// catchError(errorMesage=>handleError(errorMessage))
