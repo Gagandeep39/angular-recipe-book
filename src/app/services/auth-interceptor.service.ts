@@ -34,3 +34,8 @@ export class AuthInterceptorService implements HttpInterceptor {
     );
   }
 }
+// It will fetch user credential from authService and unsubscribe the observsble
+// The usre credential will be passed to next observable for operation
+// The value will then be used to check if user token exists
+// If yes then append it to header of requests
+// If not then send requests without hesder
