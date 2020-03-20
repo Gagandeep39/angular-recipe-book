@@ -102,6 +102,10 @@ export class AuthService {
     }
     return throwError(errorMessage);
   }
+
+  logOut() {
+    this.userCredential.next(null);
+  }
 }
 // Inside catchError(this.handleError)
 // handleError is a method passed as referece
