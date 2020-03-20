@@ -95,8 +95,10 @@ export class AuthComponent implements OnInit {
     const tempComponent = hostViewContainerRef.createComponent(alertComponent);
     // Mainpulating data of the component
     // It is of type @input i.e we can sav data
+    // Data binding
     tempComponent.instance.message = error;
     // It is of @output i.e we can subscribe
+    // Event binding
     this.closeSubscriber = tempComponent.instance.close.subscribe(() => {
       // Here we cant call this method
       // this.handleError();
