@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 interface AuthResponseData {
   idToken: string;
@@ -24,18 +26,57 @@ export class AuthService {
 
   signUp(email: string, password: string) {
     // The response data will be an AuthResponseData object
-    return this.http.post<AuthResponseData>(this.signUpUrl + this.apiKey, {
-      email: email,
-      password: password,
-      returnSecureToken: true
-    });
+    return this.http
+      .post<AuthResponseData>(this.signUpUrl + this.apiKey, {
+        email: email,
+        password: password,
+        returnSecureToken: true
+      })
+      .pipe(
+        catchError(errorResponse => {
+          let errorMessage = 'An error has Occured';
+          if (errorResponse.error || errorResponse.error.error) {
+            console.log('i was here');
+            switch (errorResponse.error.error.message) {
+              case 'EMAIL_EXISTS':
+                errorMessage = 'Email already exists';
+                break;
+              case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+                errorMessage = 'Try again later';
+                break;
+              default:
+                break;
+            }
+          }
+          return throwError(errorMessage);
+        })
+      );
   }
 
   logIn(email: string, password: string) {
-    return this.http.post<AuthResponseData>(this.signInUrl + this.apiKey, {
-      email: email,
-      password: password,
-      returnSecureToken: true
-    });
+    return this.http
+      .post<AuthResponseData>(this.signInUrl + this.apiKey, {
+        email: email,
+        password: password,
+        returnSecureToken: true
+      })
+      .pipe(
+        catchError(errorResponse => {
+          let errorMessage = 'An Error Has Occured';
+          if (errorResponse.error || errorResponse.error.error) {
+            switch (errorResponse.error.error.message) {
+              case 'EMAIL_NOT_FOUND':
+                errorMessage = 'Email doesn\'t Exist';
+                break;
+              case 'INVALID_PASSWORD':
+                errorMessage = 'Invalid Password';
+                break;
+              default:
+                break;
+            }
+          }
+          return throwError(errorMessage);
+        })
+      );
   }
 }
