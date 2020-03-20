@@ -24,10 +24,11 @@ export class AuthService {
     'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
 
   // Subject stores Logged In user's data
-  userCredential = new Subject<User>();
+  // userCredential = new Subject<User>();
   // Provides a value instead of waiting for emission
   // rquires an initial value
-  userDataImmediate = new BehaviorSubject<User>(null);
+  userCredential = new BehaviorSubject<User>(null);
+  // userDataImmediate = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient) {}
 
