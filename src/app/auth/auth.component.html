@@ -1,10 +1,16 @@
+<!-- Imperative Approach  -->
+<!-- Propgramatically display a component(without structural directive) -->
+<!-- Ng template doesnt display anything by itself  -->
+<!-- It is accessible by angular template language that can show data in it  -->
+<ng-template #customAlert appPlaceholder></ng-template>
 <div class="row">
   <div class="col-xs-12 col-md-6">
     <div>
       <!-- <div class="alert alert-danger" role="alert" *ngIf="error" style="margin-top: 12px;">
         {{ error }}
       </div> -->
-      <app-alert *ngIf="error" [message]="error" (close)="handleError()"></app-alert>
+      <!-- Declarative approach  -->
+      <!-- <app-alert *ngIf="error" [message]="error" (close)="handleError()"></app-alert> -->
     </div>
     <div>
       <!-- Custom component to display an alert box  -->
@@ -17,25 +23,25 @@
         <input
         name="email"
         placeholder="Email"
-        ngModel 
+        ngModel
         required
         email
         minlength="6"
-        type="text" 
-        id="email" 
+        type="text"
+        id="email"
         class="form-control">
       </div>
       <!-- password  -->
       <div class="form-group">
         <label for="password">Password</label>
-        <input 
+        <input
         name="password"
         minlength="4"
         required
         placeholder="Password"
         ngModel
-        type="password" 
-        id="password" 
+        type="password"
+        id="password"
         class="form-control">
       </div>
       <div>
