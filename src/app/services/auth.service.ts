@@ -2,7 +2,7 @@ import { User } from './../models/user.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, Subject } from 'rxjs';
+import { throwError, Subject, BehaviorSubject } from 'rxjs';
 
 export interface AuthResponseData {
   idToken: string;
@@ -25,6 +25,9 @@ export class AuthService {
 
   // Subject stores Logged In user's data
   userCredential = new Subject<User>();
+  // Provides a value instead of waiting for emission
+  // rquires an initial value
+  userDataImmediate = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient) {}
 
