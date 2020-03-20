@@ -4,7 +4,7 @@
       <!-- <div class="alert alert-danger" role="alert" *ngIf="error" style="margin-top: 12px;">
         {{ error }}
       </div> -->
-      <app-alert *ngIf="error" [message]="error"></app-alert>
+      <app-alert *ngIf="error" [message]="error" (close)="handleError()"></app-alert>
     </div>
     <div>
       <!-- Custom component to display an alert box  -->
