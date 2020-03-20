@@ -59,6 +59,8 @@ export class AuthService {
     const expiryDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, id, token, expiryDate);
     this.userCredential.next(user);
+    // Converting and saving data to lcoal storage
+    localStorage.setItem('userData', JSON.stringify(user));
   }
 
   logIn(email: string, password: string) {
@@ -104,9 +106,34 @@ export class AuthService {
     return throwError(errorMessage);
   }
 
+  autoLogin() {
+    // Fetches ythe local stored data as string -> Converts to Json
+    // ****Wont work as date formated changes leading to error
+    // const userData: User = JSON.parse(localStorage.getItem('userData'));
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+    if (loadedUser.token) {
+      this.userCredential.next(loadedUser);
+    }
+  }
+
   logOut() {
     this.userCredential.next(null);
     this.router.navigate(['/auth']);
+    localStorage.removeItem('userData');
   }
 }
 // Inside catchError(this.handleError)
