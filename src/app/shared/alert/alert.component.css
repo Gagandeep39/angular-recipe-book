@@ -20,3 +20,6 @@
 .alert-box-actions{
     text-align: right;
 }
+/* rgba -> red, green, blue, transparency(0-1) */
+/* z-index -> altitude (how high it must be from other component) */
+/* vw(width), vh(height) -> viewport (screen size) */
