@@ -13,7 +13,7 @@
       </ul>
       <!-- Must be visibile only if authenticated  -->
       <ul class="nav navbar-nav ml-auto" *ngIf="isAuthenticated">
-        <li class="nav-item"><a class="nav-link" style="cursor: pointer;">Log Out</a></li>
+        <li class="nav-item"><a class="nav-link" style="cursor: pointer;color: red;" (click)="logOut()">Log Out</a></li>
         <!-- Removing data-toggle will break the drop down  -->
         <li class="dropdown">
           <a href="#" class="nav-link dropdown-toggle navbar-right" role="button" data-toggle="dropdown">Manage</a>

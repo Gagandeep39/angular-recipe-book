@@ -36,4 +36,9 @@ export class HeaderComponent implements OnInit {
   fetchDataFromServer() {
     this.dataStorageService.fetchDataFromServer().subscribe();
   }
+
+  logOut() {
+    this.isAuthenticated = false;
+    this.authService.logOut();
+  }
 }
