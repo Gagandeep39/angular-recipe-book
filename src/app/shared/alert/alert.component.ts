@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-alert',
@@ -6,13 +6,16 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./alert.component.css']
 })
 export class AlertComponent implements OnInit {
-
   // Message to be displayed is passed as a property
   @Input() message: string;
+  // To close the alertbox in clicking close
+  @Output() close = new EventEmitter<void>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  closeAlert() {
+    this.close.emit();
   }
-
 }
