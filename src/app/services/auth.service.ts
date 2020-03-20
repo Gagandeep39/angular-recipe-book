@@ -31,6 +31,9 @@ export class AuthService {
   userCredential = new BehaviorSubject<User>(null);
   // userDataImmediate = new BehaviorSubject<User>(null);
 
+  // To clear the timer on manual log out
+  private tokenExpirationTimer: any;
+
   constructor(private http: HttpClient, private router: Router) {}
 
   // The response data will be an AuthResponseData object
@@ -56,11 +59,14 @@ export class AuthService {
   }
 
   createUser(email: string, id: string, token: string, expiresIn: number) {
+    // Expiry is returned in seconds, so we convert it into milliseconds
     const expiryDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, id, token, expiryDate);
     this.userCredential.next(user);
     // Converting and saving data to lcoal storage
     localStorage.setItem('userData', JSON.stringify(user));
+    // Auto logout timer will start executing as soon as the user is created
+    this.autoLogOut(expiresIn * 1000);
   }
 
   logIn(email: string, password: string) {
@@ -127,6 +133,9 @@ export class AuthService {
     );
     if (loadedUser.token) {
       this.userCredential.next(loadedUser);
+      // Future data(token expiry date) - current date will give us expiry time left
+      const expiryDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+      this.autoLogOut(expiryDuration);
     }
   }
 
@@ -134,6 +143,19 @@ export class AuthService {
     this.userCredential.next(null);
     this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
+    // If we are auto-looged out it works fine
+    // If we manually log out its necessary to stop the timer
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  }
+
+  // Will execute logOut after expiration duration
+  autoLogOut(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logOut();
+    }, expirationDuration);
   }
 }
 // Inside catchError(this.handleError)
