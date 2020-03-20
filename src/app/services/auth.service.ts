@@ -36,7 +36,6 @@ export class AuthService {
         catchError(errorResponse => {
           let errorMessage = 'An error has Occured';
           if (errorResponse.error || errorResponse.error.error) {
-            console.log('i was here');
             switch (errorResponse.error.error.message) {
               case 'EMAIL_EXISTS':
                 errorMessage = 'Email already exists';
