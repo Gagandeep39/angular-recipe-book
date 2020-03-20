@@ -32,11 +32,7 @@ export class DataStorageService {
     return this.authService.userCredential.pipe(
       take(1),
       exhaustMap(userData => {
-        return this.http.get<Recipe[]>(this.server_url,
-          {
-            // Parameter is the rule specified in firebase while accessing data
-            params: new HttpParams().set('auth', userData.token)
-          });
+        return this.http.get<Recipe[]>(this.server_url);
       }),
       // To mprove the code and prevent breaking because of no ingredients(even though it ws working fine before)
       map(response => {
