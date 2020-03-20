@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { User } from './../models/user.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -30,7 +31,7 @@ export class AuthService {
   userCredential = new BehaviorSubject<User>(null);
   // userDataImmediate = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   // The response data will be an AuthResponseData object
   // Whenever user logs in or signs up, this data is fetched
@@ -105,6 +106,7 @@ export class AuthService {
 
   logOut() {
     this.userCredential.next(null);
+    this.router.navigate(['/auth']);
   }
 }
 // Inside catchError(this.handleError)
