@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { User } from './../models/user.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -19,7 +20,6 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService {
-  apiKey = 'AIzaSyA-fSMTaEMpolwMgHKZgAQJQk9Qi3NeYxI';
   signUpUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
   signInUrl =
     'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
@@ -40,7 +40,7 @@ export class AuthService {
   // Whenever user logs in or signs up, this data is fetched
   signUp(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(this.signUpUrl + this.apiKey, {
+      .post<AuthResponseData>(this.signUpUrl + environment.apiKey, {
         email: email,
         password: password,
         returnSecureToken: true
@@ -71,7 +71,7 @@ export class AuthService {
 
   logIn(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(this.signInUrl + this.apiKey, {
+      .post<AuthResponseData>(this.signInUrl + environment.apiKey, {
         email: email,
         password: password,
         returnSecureToken: true
