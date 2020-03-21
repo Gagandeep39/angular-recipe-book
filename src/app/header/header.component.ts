@@ -16,14 +16,14 @@ export class HeaderComponent implements OnInit {
   constructor(private dataStorageService: DataStorageService, private authService: AuthService) {}
 
   ngOnInit() {
-    this.fetchDataFromServer();
+    // this.fetchDataFromServer();
     this.authService.userCredential.subscribe(userData => {
       // Method 1
       // this.isAuthenticated = userData ? true : false;
       // Method 2
       // if user exists, then !userData will give false
       // another '!' wil make it true assigning value to isAuthenticated
-      // console.log(!userData); if user exists, return false 
+      // console.log(!userData); if user exists, return false
       // console.log(!!userData); if userExists, return true
       this.isAuthenticated = !!userData;
     });
