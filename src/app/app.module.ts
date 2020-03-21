@@ -1,17 +1,17 @@
+import { CoreModule } from './services/core.module';
 import { SharedModule } from './shared/shared.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { RecipesModule } from './recipes/recipes.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthComponent } from './auth/auth.component';
 import { AlertComponent } from './shared/alert/alert.component';
-import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -29,14 +29,18 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     RecipesModule,
     ShoppingListModule,
     // Reqired for AlertComponent in Auth
-    SharedModule
+    SharedModule,
+    // undles all app services
+    // Here only proves the interceptor service
+    CoreModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true
-    }
+    // Provided by core moduel now
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptorService,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent],
   // Group of components that will be created programmatically
