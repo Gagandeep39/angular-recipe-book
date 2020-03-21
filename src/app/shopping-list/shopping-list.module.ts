@@ -6,7 +6,8 @@ import { ShoppingListComponent } from './shopping-list.component';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 
 const shoppingRoutes: Routes = [
-  { path: 'shoppinglist', component: ShoppingListComponent }
+  // { path: 'shoppinglist', component: ShoppingListComponent } // impement lazy loading
+  { path: '', component: ShoppingListComponent }
 ];
 
 @NgModule({

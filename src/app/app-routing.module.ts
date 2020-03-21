@@ -5,6 +5,9 @@ const appRoutes: Routes = [
   // pathMatc: 'full' specifies if the path is completely empty then redirect to recipe
   // This is because '' is present in every path
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+  { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule' },
+  { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
+  { path: 'shoppinglist', loadChildren: './shopping-list/shopping-list.module#ShoppingListModule' },
 ];
 
 @NgModule({

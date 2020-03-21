@@ -5,7 +5,8 @@ import { NgModule } from '@angular/core';
 import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
-  { path: 'auth', component: AuthComponent }
+  // { path: '', component: AuthComponent } // Implement azy load
+  { path: '', component: AuthComponent }
 ]
 
 @NgModule({

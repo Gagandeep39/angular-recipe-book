@@ -9,7 +9,8 @@ import { NgModule } from '@angular/core';
 const recipesRoutes: Routes = [
   // All recipes reclatde routes are not declred here
   {
-    path: 'recipes',
+    // path: 'recipes',
+    path: '', // To implement lazy loading
     component: RecipesComponent,
     canActivate: [AuthGuard],
     children: [
