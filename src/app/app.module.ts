@@ -1,3 +1,4 @@
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { RecipesModule } from './recipes/recipes.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,8 +21,6 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
     DropdownDirective,
     AuthComponent,
     LoadingSpinnerComponent,
@@ -35,7 +34,8 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     ReactiveFormsModule,
     HttpClientModule,
     // Bundled all recipes related components in a mobule and imported it here
-    RecipesModule
+    RecipesModule,
+    ShoppingListModule
   ],
   providers: [
     {

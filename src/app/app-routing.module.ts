@@ -7,8 +7,6 @@ const appRoutes: Routes = [
   // pathMatc: 'full' specifies if the path is completely empty then redirect to recipe
   // This is because '' is present in every path
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-
-  { path: 'shoppinglist', component: ShoppingListComponent },
   { path: 'auth', component: AuthComponent }
 ];
 
