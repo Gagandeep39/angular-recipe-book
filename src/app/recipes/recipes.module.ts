@@ -22,12 +22,14 @@ import { RecipesRoutingModule } from './recipes-routing.module';
   ],
   exports: [
     // All the components that we want to use in other module are exported from her
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    RecipeItemComponent,
-    RecipeStartComponent,
-    RecipeEditComponent
+    // Update -> We are using these internall via arouting
+    // No other module is caling these compoents so we need not export these
+    // RecipesComponent,
+    // RecipeListComponent,
+    // RecipeDetailComponent,
+    // RecipeItemComponent,
+    // RecipeStartComponent,
+    // RecipeEditComponent
   ],
   imports: [
     // We need to exlicitly specify we use routing in this module
