@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { SharedModule } from './../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -41,13 +41,15 @@ import { RecipesRoutingModule } from './recipes-routing.module';
     // Superset of CommonModule
     // BrowserModule,
     // Only Contains directives such as NgIf, NgFor etc
-    CommonModule,
+    // CommonModule,  // Not needed anymore as i is a part of SharedModule imported below
     // Added since we use reactive forms (formGroup, formArray)
     ReactiveFormsModule,
     // We dd not need HttpModule because it provides ***services and those are available application wide
     // HttpClientModule,
     // To Use routing in Recpies odule we declared all recoutes and imported it in this moduel
     RecipesRoutingModule,
+    // Bundle of components used by multiple modules
+    SharedModule
   ]
 })
 export class RecipesModule {}

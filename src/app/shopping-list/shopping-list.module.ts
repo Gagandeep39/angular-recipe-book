@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from './../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -12,9 +11,10 @@ const shoppingRoutes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
+    // CommonModule,
     FormsModule,
     RouterModule.forChild(shoppingRoutes),
+    SharedModule
   ],
   declarations: [
     ShoppingListComponent,
