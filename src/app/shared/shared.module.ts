@@ -20,6 +20,12 @@ import { PlaceholderDirective } from './placeholder.directive';
     AlertComponent,
     PlaceholderDirective,
     CommonModule
+  ],
+  // Group of components that will be created programmatically
+  // Thesese compjents dont have a route or a selector
+  // 'selector: [appPlaceholder]' is not a selctor (its a directive)
+  entryComponents: [
+    AlertComponent
   ]
 })
 export class SharedModule {}
