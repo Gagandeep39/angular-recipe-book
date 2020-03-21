@@ -1,3 +1,4 @@
+import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './services/core.module';
 import { SharedModule } from './shared/shared.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
@@ -10,20 +11,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthComponent } from './auth/auth.component';
 import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    AuthComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
+    // Not needed anymore as they are imported in feature modules
+    // FormsModule,
+    // ReactiveFormsModule,
     HttpClientModule,
     // Bundled all recipes related components in a mobule and imported it here
     RecipesModule,
@@ -32,7 +32,8 @@ import { AlertComponent } from './shared/alert/alert.component';
     SharedModule,
     // undles all app services
     // Here only proves the interceptor service
-    CoreModule
+    CoreModule,
+    AuthModule
   ],
   providers: [
     // Provided by core moduel now

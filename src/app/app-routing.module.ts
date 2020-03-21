@@ -1,13 +1,10 @@
-import { AuthComponent } from './auth/auth.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 const appRoutes: Routes = [
   // pathMatc: 'full' specifies if the path is completely empty then redirect to recipe
   // This is because '' is present in every path
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-  { path: 'auth', component: AuthComponent }
 ];
 
 @NgModule({
