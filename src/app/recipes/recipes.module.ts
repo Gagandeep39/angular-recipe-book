@@ -1,5 +1,5 @@
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { RecipesComponent } from './recipes.component';
@@ -36,8 +36,12 @@ import { RecipesRoutingModule } from './recipes-routing.module';
     // Without thus, <router-outlet> wont be recognized
     // We added it n root module, but everything works standlone so we have to specify it here too
     RouterModule,
-    // We use directives such as (ngFor, ngIf etc)
-    BrowserModule,
+    // We use directives such as (ngFor, ngIf etc), along with rendering related components
+    // Only required in Root modules
+    // Superset of CommonModule
+    // BrowserModule,
+    // Only Contains directives such as NgIf, NgFor etc
+    CommonModule,
     // Added since we use reactive forms (formGroup, formArray)
     ReactiveFormsModule,
     // We dd not need HttpModule because it provides ***services and those are available application wide
