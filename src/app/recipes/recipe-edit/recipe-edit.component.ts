@@ -130,4 +130,10 @@ export class RecipeEditComponent implements OnInit {
       ])
     });
   }
+
+  // "recipeForm.get('ingredients').controls in .html gives error in production build
+  // To fix this we use
+  // get ingredientsControl(){
+  //   return (this.recipeForm.get('ingredients') as FormArray).controls;
+  // }
 }
