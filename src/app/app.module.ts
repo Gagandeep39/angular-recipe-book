@@ -46,3 +46,16 @@ import { AlertComponent } from './shared/alert/alert.component';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+// .FireBase contains data related to hosting in firebase
+// It can be deleted from the repository later on
+
+// _config.yml contains data related to Github page theme
+// Its not being used because we are depoying our github project there so it can be removed
+
+// 404.html is a workaorund for github pages
+// Added "src/404.html" in angular.json
+// Github is static host and doesnt allow us to firectly send index.html incase of error
+// A workaroud is to keep an index.html renamed as 404.html to fix the error while routing
+// Error was that when we manually add a path in addressbar, the server gives us 404 error
+// With work around it will give us index.html file
