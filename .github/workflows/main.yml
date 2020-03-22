@@ -23,7 +23,6 @@ jobs:
          npm install -g ngh
          npm install
          ng build --prod --base-href="/angular-recipe-book/"
-         ngh --dir=dist/recipe-book
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       env:
@@ -31,3 +30,9 @@ jobs:
         BASE_BRANCH: master
         BRANCH: gh-pages
         FOLDER: dist/recipe-book
+    - name: copy File
+      uses: canastro/copy-file-action@master
+      with:
+        BRANCH: gh_pages
+        source: "index.html"
+        target: "404.html"
