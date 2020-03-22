@@ -1,34 +1,22 @@
-name: Build and test angular-cli-ghpages
-
+name: Build and Deploy
 on: [push]
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Use Node.js 10.x
-        uses: actions/setup-node@v1
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
         with:
-          node-version: 13.x
+          persist-credentials: false
 
-      - name: Prepare and deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
         run: |
-          cd src
-          npm install --silent
+          npm install
           npm run build
-          npm run test
-          cd dist
-          npm link
-          cd ..
-          npm install -g @angular/cli
-          ng new recipe-book --defaults
-          cd recipe-book
-          npm link angular-cli-ghpages
-          ng add angular-cli-ghpages
-          ng deploy
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: dist/recipe-book # The folder the action should deploy.
