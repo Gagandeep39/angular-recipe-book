@@ -20,6 +20,7 @@ jobs:
     - name: Build
       run: |
          npm install -g @angular/cli
+         npm i ngh
          npm install
          ng build --prod --base-href="/angular-recipe-book/"
          ngh --dir=dist/recipe-book
