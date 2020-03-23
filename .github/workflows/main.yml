@@ -50,10 +50,9 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
-        npm install -g @angular/cli
-        npm i npx --save-dev 
-        npm i -g angular-cli-ghpages --save-dev 
-        npm install --save-dev @angular/cli@latest
+        npm install -g @angular/cli@latest
+        ng update @angular/cli
+        npm i angular-cli-ghpages --save-dev 
         npm install
         npm update
         npm run ng -- deploy --base-href=/angular-recipe-book/ --name="gagandeep39" --email=singh.gagandeep3911@gmail.com --no-silent
