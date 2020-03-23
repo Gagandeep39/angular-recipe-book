@@ -55,4 +55,4 @@ jobs:
         npm i angular-cli-ghpages --save-dev 
         npm install
         ng build --prod --base-href "https://gagandeep39.github.io/angular-recipe-book/"
-        npx angular-cli-ghpages --dir=dist/recipe-book   
+        ngh --dir=dist/recipe-book
