@@ -50,6 +50,7 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
+        npm i npx --save-dev 
         npm i angular-cli-ghpages --save-dev 
         npm install
         ng build --prod --base-href "https://gagandeep39.github.io/angular-recipe-book/"
