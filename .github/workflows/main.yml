@@ -1,60 +1,60 @@
-# name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
-# on:
-#   push:	
-#     branches:	
-#       - master
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Checkout
-#       uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
-#       with:
-#         persist-credentials: false
-#     - name: Use Node.js 13.x
-#       uses: actions/setup-node@v1
-#       with:
-#         node-version: '13.x'
-#     - name: Build
-#       run: |
-#          npm install -g @angular/cli@6
-#          npm install
-#          ng build --prod --base-href="/angular-recipe-book/"
-#     - name: Deploy
-#       uses: JamesIves/github-pages-deploy-action@releases/v2
-#       env:
-#         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-#         BASE_BRANCH: master
-#         BRANCH: gh-pages
-#         FOLDER: dist/recipe-book
-name: Deploy to GitHub Pages via angular-cli-ghpages
-
-on: [push]
+on:
+  push:	
+    branches:	
+      - master
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Use Node.js 10.x
+      uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+      with:
+        persist-credentials: false
+    - name: Use Node.js 13.x
       uses: actions/setup-node@v1
       with:
-        node-version: 13.x
-
-    - name: Prepare and deploy
-      env:
-        GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        node-version: '13.x'
+    - name: Build
       run: |
-        rm -rf node_modules/
-        npm install -g @angular/cli@latest
-        ng update @angular/cli
-        npm i angular-cli-ghpages --save-dev 
-        npm install
-        npm update
-        npm run ng -- deploy --base-href=/angular-recipe-book/ --name="gagandeep39" --email=singh.gagandeep3911@gmail.com --no-silent
+         npm install -g @angular/cli@6
+         npm install
+         ng build --prod --base-href="/angular-recipe-book/"
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v2
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BASE_BRANCH: master
+        BRANCH: gh-pages
+        FOLDER: dist/recipe-book
+# name: Deploy to GitHub Pages via angular-cli-ghpages
+
+# on: [push]
+
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v2
+
+#     - name: Use Node.js 10.x
+#       uses: actions/setup-node@v1
+#       with:
+#         node-version: 13.x
+
+#     - name: Prepare and deploy
+#       env:
+#         GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+#       run: |
+#         rm -rf node_modules/
+#         npm install -g @angular/cli@latest
+#         ng update @angular/cli
+#         npm i angular-cli-ghpages --save-dev 
+#         npm install
+#         npm update
+#         npm run ng -- deploy --base-href=/angular-recipe-book/ --name="gagandeep39" --email=singh.gagandeep3911@gmail.com --no-silent
 
