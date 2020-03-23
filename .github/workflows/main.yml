@@ -50,6 +50,7 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
+        rm -rf node_modules/
         npm install -g @angular/cli@latest
         ng update @angular/cli
         npm i angular-cli-ghpages --save-dev 
