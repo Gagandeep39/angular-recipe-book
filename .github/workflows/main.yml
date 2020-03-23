@@ -44,11 +44,13 @@ jobs:
     - name: Use Node.js 10.x
       uses: actions/setup-node@v1
       with:
-        node-version: 10.x
+        node-version: 13.x
 
     - name: Prepare and deploy
       env:
         GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
+        npm i angular-cli-ghpages --save-dev 
         npm install
-        npm run ng -- deploy --base-href=/recipe-book/ --name="gagandeep39" --email=singh.gagandeep3911@gmail.com --no-silent
+        ng build --prod --base-href "https://gagandeep39.github.io/angular-recipe-book/"
+        npx angular-cli-ghpages --dir=dist/recipe-book   
