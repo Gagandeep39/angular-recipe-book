@@ -56,5 +56,5 @@ jobs:
         npm install --save-dev @angular/cli@latest
         npm install
         npm update
-        ng deploy --repo=https://github.com/gagandeep39/angular-recipe-book.git --name="gagandeep39" --email=singh.gagandeep3911@gmail.com
+        npm run ng -- deploy --base-href=/angular-recipe-book/ --name="gagandeep39" --email=singh.gagandeep3911@gmail.com --no-silent
 
