@@ -53,6 +53,7 @@ jobs:
         npm install -g @angular/cli
         npm i npx --save-dev 
         npm i -g angular-cli-ghpages --save-dev 
+        npm install --save-dev @angular/cli@latest
         npm install
         npm update
         ng deploy --repo=https://github.com/gagandeep39/angular-recipe-book.git --name="gagandeep39" --email=singh.gagandeep3911@gmail.com
