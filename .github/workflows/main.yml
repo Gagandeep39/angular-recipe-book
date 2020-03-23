@@ -22,7 +22,8 @@ jobs:
          npm install -g @angular/cli@6
          npm install
          ng build --prod --base-href="https://gagandeep39.github.io/angular-recipe-book/"
-         cd dist
+         cd dist/recipe-book
+         ls
          touch 404.html
          cp index.html 404.html
     - name: Deploy
